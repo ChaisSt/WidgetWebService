@@ -19,9 +19,9 @@ namespace WidgetWebService
         [JsonProperty("Category")]
         public int Category { get; set; }
     }
-    public partial class WidgetsArray
+    public partial class Widgets
     {
         [JsonProperty("widgets")]
-        public Widget[] Widgets { get; set; }
+        public Widget[] WidgetsA { get; set; }
     }
 }

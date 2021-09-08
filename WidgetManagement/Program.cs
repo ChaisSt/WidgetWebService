@@ -158,7 +158,9 @@ namespace WidgetManagement
                 var res = UpdateAsync(path, widget).Result;
                 output = $"\n Widget information \n Name: {widget.Name} \n Quantity: {widget.Quantity} \n Category: {widget.Category}\n";
             }
-            else { output = $"\n {name} is not an existing widget, please try again. No change made."; }
+            else 
+                output = $"\n {name} is not an existing widget, please try again. No change made."; 
+
             return output;
         }
 
@@ -187,6 +189,7 @@ namespace WidgetManagement
             }
             else
                 output = " Name is already used.\n";
+
             return output;
         }
 
@@ -202,6 +205,7 @@ namespace WidgetManagement
             }
             else
                 output = $" {name} doesn't exist. Please try again.\n";
+
             return output;
         }
 
@@ -214,16 +218,13 @@ namespace WidgetManagement
         }
 
         //POST to web service
-        public static async Task<Widget> UpdateAsync(string path, Widget widget)
+        public static async Task<string> UpdateAsync(string path, Widget widget)
         {
             var json = JsonConvert.SerializeObject(widget);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(path, content);
-            
-            //doesn't work but file updates
-            string data = await response.Content.ReadAsStringAsync();
-            var test = JsonConvert.DeserializeObject<Widget>(data);
-            return test;
+            string data = response.ToString();
+            return data;
         }
 
         //DELETE from web service
