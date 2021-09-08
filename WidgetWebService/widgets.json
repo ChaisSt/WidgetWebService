@@ -1,11 +1,6 @@
 {
   "widgets": [
     {
-      "Name": "Test",
-      "Quantity": 52,
-      "Category": 4
-    },
-    {
       "Name": "TableWidget",
       "Quantity": 52,
       "Category": 4
@@ -17,7 +12,7 @@
     },
     {
       "Name": "PizzaWidget",
-      "Quantity": 57,
+      "Quantity": 50,
       "Category": 8
     },
     {
@@ -37,8 +32,8 @@
     },
     {
       "Name": "MagicWidget",
-      "Quantity": 75,
-      "Category": 1
+      "Quantity": 68,
+      "Category": 5
     },
     {
       "Name": "ComputerWidget",

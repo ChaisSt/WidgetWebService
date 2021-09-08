@@ -31,10 +31,11 @@ namespace WidgetWebService.Controllers
 
         // GET: /widget - Get all widgets
         [HttpGet]
-        public string Get()
+        public List<Widget> Get()
         {
-            var data = System.IO.File.ReadAllText(dataPath);
-            return data;
+            //var data = System.IO.File.ReadAllText(dataPath);
+            var widgetList = widgets.Widgets.ToList();
+            return widgetList;
         }
 
         // GET /widget/name/{Name} - Get widget by name
@@ -75,7 +76,7 @@ namespace WidgetWebService.Controllers
             var jsonObj = JObject.Parse(json1);
             var widgetArray = jsonObj.GetValue("widgets") as JArray;
 
-            var deleteWidget = widgetArray.FirstOrDefault(obj => obj["Name"].Value<string>() == name);
+            var deleteWidget = widgetArray.FirstOrDefault(obj => obj["Name"].Value<string>().Equals(name,StringComparison.OrdinalIgnoreCase));
             widgetArray.Remove(deleteWidget);
 
             string newJson = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
@@ -87,7 +88,7 @@ namespace WidgetWebService.Controllers
 
         public void Edit(Widget widget)
         {
-            dynamic jObject = JsonConvert.DeserializeObject(Get());
+            dynamic jObject = JsonConvert.DeserializeObject(System.IO.File.ReadAllText(dataPath));
             int i = 0;
             //Iterate through each widget in list to find position of matching widget
             foreach (var existing in widgets.Widgets)
@@ -128,6 +129,5 @@ namespace WidgetWebService.Controllers
             //Populate widgets array with current values
             widgets = JsonConvert.DeserializeObject<WidgetsArray>(System.IO.File.ReadAllText(dataPath));
         }
-
     }
 }
